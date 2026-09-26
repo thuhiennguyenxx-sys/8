@@ -9,7 +9,7 @@ app.secret_key = "bi_mat_quan_ly_may_tho_hospital_v2"
 
 # Cấu hình kết nối Supabase chính thức
 SUPABASE_URL = "https://sbxfxhkynfgoslhboqtt.supabase.co"
-SUPABASE_KEY = "sb_publishable_sSRc9QrJcmzL9E3i7MOI6w_tuiLoedp"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNieGZ4aGt5bmZnb3NsaGJvcXR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0MzI4NDksImV4cCI6MjEwNjAwODg0OX0.Vl7_URmPVTGdS2G3QMkkyDZzdVXumd8KSEwnfCCq9So"
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
