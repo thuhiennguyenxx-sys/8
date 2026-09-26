@@ -7,11 +7,10 @@ from supabase import create_client, Client
 app = Flask(__name__)
 app.secret_key = "bi_mat_quan_ly_may_tho_hospital_v2"
 
-# Cấu hình kết nối Supabase (đã dùng khóa anon chuẩn)
+# Cấu hình kết nối Supabase (đã dùng khóa anon chuẩn dạng eyJ...)
 SUPABASE_URL = "https://sbxfxhkynfgoslhboqtt.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsIn... [Dán khóa anon/public chuẩn dạng eyJ vào đây nếu muốn lưu DB]"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNieGZ4aGt5bmZnb3NsaGJvcXR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0MzI4NDksImV4cCI6MjEwNjAwODg0OX0.Vl7_URmPVTGdS2G3QMkkyDZzdVXumd8KSEwnfCCq9So" # Dán khóa anon chuẩn của bạn vào đây
 
-# Nếu chưa cần kết nối DB ngay, bạn có thể để trống hoặc dùng khóa demo, web vẫn lên giao diện bình thường
 try:
     supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 except:
@@ -21,9 +20,7 @@ UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Danh sách 44 máy thở chuẩn hóa cho bệnh viện
 MACHINES_DATA = [
-    # ICU Khu B
     {"department": "ICU Khu B", "model": "PB980", "serial": "35B1701595"},
     {"department": "ICU Khu B", "model": "PB840", "serial": "3512201164"},
     {"department": "ICU Khu B", "model": "PB840", "serial": "3512201151"},
@@ -35,12 +32,10 @@ MACHINES_DATA = [
     {"department": "ICU Khu B", "model": "PB980", "serial": "35B2104459"},
     {"department": "ICU Khu B", "model": "PB840", "serial": "35B2005882"},
     {"department": "ICU Khu B", "model": "PB840", "serial": "35B2005880"},
-    # Nhiệt Đới
     {"department": "Nhiệt Đới", "model": "PB840", "serial": "3512210776"},
     {"department": "Nhiệt Đới", "model": "PB840", "serial": "3512211171"},
     {"department": "Nhiệt Đới", "model": "PB560", "serial": "4096600895"},
     {"department": "Nhiệt Đới", "model": "PB560", "serial": "4096600896"},
-    # HS Ngoại TK
     {"department": "HS Ngoại TK", "model": "PB560", "serial": "4096600905"},
     {"department": "HS Ngoại TK", "model": "PB840", "serial": "3512211582"},
     {"department": "HS Ngoại TK", "model": "PB840", "serial": "3512211576"},
@@ -51,14 +46,12 @@ MACHINES_DATA = [
     {"department": "HS Ngoại TK", "model": "PB840", "serial": "3512211555"},
     {"department": "HS Ngoại TK", "model": "PB840", "serial": "3512211547"},
     {"department": "HS Ngoại TK", "model": "PB840", "serial": "3512211565"},
-    # PTT Người Lớn
     {"department": "PTT Người Lớn", "model": "PB840", "serial": "3512152876"},
     {"department": "PTT Người Lớn", "model": "PB840", "serial": "3512152565"},
     {"department": "PTT Người Lớn", "model": "PB840", "serial": "3512152616"},
     {"department": "PTT Người Lớn", "model": "PB980", "serial": "35B2104679"},
     {"department": "PTT Người Lớn", "model": "PB980", "serial": "35B2104677"},
     {"department": "PTT Người Lớn", "model": "PB840", "serial": "3512152898"},
-    # ICU Khu D
     {"department": "ICU Khu D", "model": "PB840", "serial": "3512201145"},
     {"department": "ICU Khu D", "model": "PB840", "serial": "3512201156"},
     {"department": "ICU Khu D", "model": "PB840", "serial": "3512201160"},
@@ -66,7 +59,6 @@ MACHINES_DATA = [
     {"department": "ICU Khu D", "model": "PB840", "serial": "3512152874"},
     {"department": "ICU Khu D", "model": "PB840", "serial": "3512152885"},
     {"department": "ICU Khu D", "model": "PB840", "serial": "3512202941"},
-    # PTT Trẻ Em
     {"department": "PTT Trẻ Em", "model": "PB980", "serial": "35B2104673"},
     {"department": "PTT Trẻ Em", "model": "PB980", "serial": "35B2104657"},
     {"department": "PTT Trẻ Em", "model": "PB980", "serial": "35B1401604"},
@@ -171,8 +163,6 @@ def submit_inspection():
             flash("Đã lưu biên bản thành công!", "success")
         except Exception as e:
             flash(f"Lỗi lưu DB: {e}", "danger")
-    else:
-        flash("Đã tiếp nhận (chế độ không có DB)", "success")
 
     return redirect(url_for('index'))
 
